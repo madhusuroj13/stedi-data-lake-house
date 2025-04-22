@@ -1,3 +1,4 @@
+
 CREATE EXTERNAL TABLE 'customer'(
   'customername` string COMMENT 'from deserializer', 
   'email' string COMMENT 'from deserializer', 
@@ -30,8 +31,6 @@ TBLPROPERTIES (
   'averageRecordSize'='307', 
   'classification'='json', 
   'compressionType'='none', 
-  'objectCount'='1', 
-  'partition_filtering.enabled'='true', 
-  'recordCount'='956', 
-  'sizeKey'='293777', 
+  'objectCount'='1',
+  'sizeKey'='3298200', 
   'typeOfData'='file')
