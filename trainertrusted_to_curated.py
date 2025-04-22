@@ -1,0 +1,49 @@
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+AccelerometerTrusted_node1693745022656=glueContext.create_dynamic_frame.from_options()
+format_options={"multiline":False},
+connection_type='s3',
+  format='json',
+connection_options={"paths":["s3://stedi-s3/customer/curated/"].'recurse':True},
+transformation_ctx="CustomerCurated_node1693745022656",
+)
+
+stepTrainerLanding_nodeglueContext.create_dynamic_frame.from_options(
+    format_options={"multiline":False},
+    connection_types='s3',
+      format='json',
+    connection_options={
+        "paths":[
+            's3://stedi-s3/step_trainer/landing/"'],
+            "recurse":True,
+    },
+    transformation_ctx="StepTrainerLanding_node1",
+    )
+    
+    join_node1693745105307=join.apply(
+        frame1=StepTrainerLanding_node1,
+        frame2=CustomerCurated_node1693745105307,
+        keys1=["serialNumber"],
+        keys2=[serialNumber"],
+    transformation_ctx='join_node1693745105307',
+    )
+    MachineLearningCurated_node3=glueContext.write_dynamic_frame.from_options(
+        frame=join_node1693745105307,
+        connection_type="s3",
+          format="json",
+         connection_options={"path":"s3://stedi-s3/ML_curated/","partitionkeys":[]},
+         transformation_ctx="MachineLearningCurated_node3",
+         )
+
+job.commit()
